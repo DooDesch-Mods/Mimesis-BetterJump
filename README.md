@@ -74,3 +74,7 @@ Targets `netstandard2.1`. References the game DLLs and MelonLoader from the shar
 ## Credits / License
 
 Created by **DooDesch**. Released under the **MIT License** (Copyright (c) 2025 DooDesch). Source and releases: [github.com/DooDesch/Mimesis-BetterJump](https://github.com/DooDesch/Mimesis-BetterJump).
+
+## AI disclosure
+
+The mod icon is AI-generated. Code and configuration are hand-written.
