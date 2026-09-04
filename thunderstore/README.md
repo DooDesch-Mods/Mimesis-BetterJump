@@ -59,3 +59,7 @@ There is no keybind - just use your normal in-game jump input. BetterJump hooks 
 - Effects apply only to your own avatar, so the mod is safe in multiplayer - it never affects other players.
 
 Source and license (MIT, Copyright (c) 2025 DooDesch): [github.com/DooDesch/Mimesis-BetterJump](https://github.com/DooDesch/Mimesis-BetterJump).
+
+## AI disclosure
+
+The mod icon is AI-generated. Code and configuration are hand-written.
