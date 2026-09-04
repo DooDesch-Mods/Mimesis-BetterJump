@@ -4,6 +4,11 @@ All notable changes to BetterJump are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 project adheres to Semantic Versioning.
 
+## [1.5.4] - 2026-09-04
+
+### Changed
+- The mod is built against MIMESIS 0.3.1 and tested in a running game on that build. Jump behaviour does not change.
+
 ## [1.5.3] - 2026-06-22
 
 ### Fixed
