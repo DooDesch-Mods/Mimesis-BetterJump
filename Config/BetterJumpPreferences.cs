@@ -1,4 +1,6 @@
 using System;
+using BetterJump.Runtime;
+using DooDesch;
 using MelonLoader;
 using UnityEngine;
 
@@ -14,6 +16,11 @@ namespace BetterJump.Config
 		private static MelonPreferences_Entry<float> _forceUngroundTime;
 		private static MelonPreferences_Entry<float> _airGravityScale;
 		private static MelonPreferences_Entry<bool> _debugLogs;
+		private static HostSettings _hostSettings;
+		private static HostSetting<bool> _hostEnabled;
+		private static HostSetting<float> _hostJumpVelocity;
+		private static HostSetting<float> _hostForceUngroundTime;
+		private static HostSetting<float> _hostAirGravityScale;
 
 		internal static void Initialize()
 		{
@@ -28,6 +35,13 @@ namespace BetterJump.Config
 			_forceUngroundTime = CreateEntry("ForceUngroundTime", 0.08f, "Force Unground Time", "Seconds to keep avatar airborne before the next ground check can succeed. This prevents the game from immediately detecting the ground after a jump, allowing for better jump responsiveness. Default: 0.08");
 			_airGravityScale = CreateEntry("AirGravityScale", 0.7f, "Air Gravity Scale", "Gravity multiplier applied during the fast part of the RISE (lower = floatier, higher arc). Near the apex it blends back to normal gravity so there is no hovering 'platform' at the top, and the descent always uses normal gravity for crisp landings. 1.0 disables the effect. Default: 0.7");
 			_debugLogs = CreateEntry("DebugLogs", false, "Debug Logs", "Enable detailed debug logging for troubleshooting jump behavior.");
+
+			_hostSettings = new HostSettings(CategoryId);
+			_hostEnabled = _hostSettings.Register(_enabled, false);
+			_hostJumpVelocity = _hostSettings.Register(_jumpVelocity, 0f);
+			_hostForceUngroundTime = _hostSettings.Register(_forceUngroundTime, 0.01f);
+			_hostAirGravityScale = _hostSettings.Register(_airGravityScale, 1f);
+			_hostSettings.EffectiveValuesChanged += JumpRuntimeState.Reset;
 		}
 
 		private static MelonPreferences_Entry<T> CreateEntry<T>(string identifier, T defaultValue, string displayName, string description = null)
@@ -40,13 +54,13 @@ namespace BetterJump.Config
 			return _category.CreateEntry(identifier, defaultValue, displayName, description);
 		}
 
-		internal static bool Enabled => _enabled.Value;
+		internal static bool Enabled => _hostEnabled?.Value ?? false;
 
-		internal static float JumpVelocity => Mathf.Max(0f, _jumpVelocity.Value);
+		internal static float JumpVelocity => Mathf.Max(0f, _hostJumpVelocity?.Value ?? 0f);
 
-		internal static float ForceUngroundTime => Mathf.Max(0.01f, _forceUngroundTime.Value);
+		internal static float ForceUngroundTime => Mathf.Max(0.01f, _hostForceUngroundTime?.Value ?? 0.01f);
 
-		internal static float AirGravityScale => Mathf.Clamp(_airGravityScale.Value, 0.1f, 1f);
+		internal static float AirGravityScale => Mathf.Clamp(_hostAirGravityScale?.Value ?? 1f, 0.1f, 1f);
 
 		internal static bool DebugLogs => _debugLogs.Value;
 	}

@@ -154,6 +154,11 @@ namespace BetterJump.Runtime
 			ApplyAirGravity(actor, state);
 		}
 
+		internal static void Reset()
+		{
+			States.Clear();
+		}
+
 		internal static void OnActorDestroyed(ProtoActor actor)
 		{
 			States.Remove(actor);

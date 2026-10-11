@@ -19,5 +19,10 @@ namespace BetterJump
 			// (See FakePlayers/Core.cs.)
 			MelonLogger.Msg("BetterJump initialized. JumpVelocity={0:F2}, ForceUngroundTime={1:F2}, AirGravityScale={2:F2}", BetterJumpPreferences.JumpVelocity, BetterJumpPreferences.ForceUngroundTime, BetterJumpPreferences.AirGravityScale);
 		}
+
+		public override void OnUpdate()
+		{
+			DooDesch.HostSettings.Update();
+		}
 	}
 }
