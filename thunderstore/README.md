@@ -5,7 +5,7 @@
 
 > Makes jumping in Mimesis actually useful - the stock jump is near-useless for getting around, so BetterJump retunes it (stronger configurable jump plus a brief forced-airborne window) to clear gaps and obstacles reliably.
 
-![Version](https://img.shields.io/badge/version-1.5.5-blue)
+![Version](https://img.shields.io/badge/version-1.5.7-blue)
 ![Game](https://img.shields.io/badge/game-MIMESIS-purple)
 ![MelonLoader](https://img.shields.io/badge/MelonLoader-0.7.3+-green)
 ![Status](https://img.shields.io/badge/status-working-brightgreen)
@@ -17,7 +17,7 @@
 - Retunes your local player's jump so it is actually useful for map traversal (the default jump is near-useless).
 - Configurable upward jump velocity (default `4.8` units/second) - raise it for higher, stronger jumps.
 - Configurable "force unground" window after takeoff that keeps you airborne briefly so the game does not instantly re-detect the ground, improving jump responsiveness (default `0.08s`).
-- Affects only your own avatar and only triggers when you jump from the ground - other players are unaffected.
+- Applies to each modded player's own avatar and only triggers from the ground. Jump rules follow the lobby host.
 - Single `Enabled` toggle to switch the mod on/off without uninstalling, plus an optional `DebugLogs` switch for troubleshooting.
 - Uses your normal jump key - no input rebinding.
 
@@ -45,11 +45,14 @@ For Nexus, install [MimicAPI 0.4.2](https://www.nexusmods.com/mimesis/mods/11) s
 
 Stored in `UserData/MelonPreferences.cfg` under the `BetterJump` category.
 
+Each Steam lobby uses a snapshot of the host's `Enabled`, `JumpVelocity`, `ForceUngroundTime` and `AirGravityScale` settings. Clients use that snapshot without overwriting their saved configuration. `DebugLogs` stays local. If the host does not have BetterJump, clients use vanilla jump behavior. Change the host configuration before creating the next lobby.
+
 | Option | Description | Default | Values/Range |
 |---|---|---|---|
 | `Enabled` | Enable BetterJump functionality. When disabled, the mod does not modify jump behavior. | `true` | `true` / `false` |
 | `JumpVelocity` | Upward speed applied when a jump starts (units/second). Higher values result in stronger jumps. | `4.8` | Any value `>= 0` (negative values are clamped to `0` at runtime) |
 | `ForceUngroundTime` | Seconds to keep the avatar airborne before the next ground check can succeed. Prevents the game from immediately detecting the ground after a jump, improving responsiveness. | `0.08` | Any value `>= 0.01` (clamped to a minimum of `0.01s`; the effective hold is at least `0.02s` at jump time) |
+| `AirGravityScale` | Gravity multiplier during ascent. Blends back to normal gravity near the apex; descent uses normal gravity. | `0.7` | `0.1` - `1.0` (clamped at runtime) |
 | `DebugLogs` | Enable detailed debug logging for troubleshooting jump behavior. | `false` | `true` / `false` |
 
 ## Usage
@@ -57,7 +60,7 @@ Stored in `UserData/MelonPreferences.cfg` under the `BetterJump` category.
 There is no keybind - just use your normal in-game jump input. BetterJump hooks the game's jump and ground-check logic, so jumping simply feels stronger and more responsive.
 
 - Raise `JumpVelocity` for higher jumps; adjust `ForceUngroundTime` if jumps feel cut short.
-- Changes take effect on game (re)launch.
+- Set jump rules in the host configuration before creating the lobby.
 - Effects apply only to your own avatar.
 
 Source and license (MIT, Copyright (c) 2025 DooDesch): [github.com/DooDesch-Mods/Mimesis-BetterJump](https://github.com/DooDesch-Mods/Mimesis-BetterJump).

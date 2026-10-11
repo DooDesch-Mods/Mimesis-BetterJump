@@ -4,6 +4,11 @@ All notable changes to BetterJump are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 project adheres to Semantic Versioning.
 
+## [1.5.7] - 2026-10-11
+
+- Jump rules use the host's settings for each Steam lobby; debug logging stays local and saved client configuration is preserved.
+- Clients use vanilla jumping if the host does not have BetterJump. Jump state resets when effective host settings change.
+
 ## [1.5.6] - 2026-10-11
 
 - Built against MIMESIS 0.3.2. Jump settings are unchanged.
