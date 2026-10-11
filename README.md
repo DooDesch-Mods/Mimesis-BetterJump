@@ -27,11 +27,11 @@
 |---|---|
 | MIMESIS | 0.3.2 |
 | MelonLoader | 0.7.3+ |
-| MimicAPI | Required - MimicAPI 0.4.2, [DooDesch fork](https://github.com/DooDesch/MimicAPI), included in the Nexus archive |
+| MimicAPI | Required - MimicAPI 0.4.2, [Nexus download](https://www.nexusmods.com/mimesis/mods/11), install separately |
 
 > BetterJump reads private jump/ground state through MimicAPI's reflection helpers and will not function without it. A Thunderstore mod manager resolves it automatically as `NeoMimicry-MimicAPI-0.3.0`.
 
-The Nexus archive includes the maintained MimicAPI 0.4.2 fork. The Thunderstore manifest still refers to the original NeoMimicry package.
+For Nexus, install [MimicAPI 0.4.2](https://www.nexusmods.com/mimesis/mods/11) separately. Keep one `Mods/MimicAPI.dll`; the mod archive does not include it. Thunderstore resolves its existing MimicAPI dependency through the mod manager.
 
 ## Installation
 
