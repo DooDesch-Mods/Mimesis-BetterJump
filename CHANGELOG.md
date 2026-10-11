@@ -4,7 +4,7 @@ All notable changes to BetterJump are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 project adheres to Semantic Versioning.
 
-## [1.5.5] - 2026-10-11
+## [1.5.6] - 2026-10-11
 
 - Built against MIMESIS 0.3.2. Jump settings are unchanged.
 
