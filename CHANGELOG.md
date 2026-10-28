@@ -4,6 +4,12 @@ All notable changes to BetterJump are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 project adheres to Semantic Versioning.
 
+## [1.5.8] - 2026-10-28
+
+### Changed
+
+- Replace the package icon and add a thumbnail and gallery captured in MIMESIS.
+
 ## [1.5.7] - 2026-10-11
 
 - Jump rules use the host's settings for each Steam lobby; debug logging stays local and saved client configuration is preserved.

@@ -5,10 +5,12 @@
 
 > Makes jumping in Mimesis actually useful - the stock jump is near-useless for getting around, so BetterJump retunes it (stronger configurable jump plus a brief forced-airborne window) to clear gaps and obstacles reliably.
 
-![Version](https://img.shields.io/badge/version-1.5.7-blue)
+![Version](https://img.shields.io/badge/version-1.5.8-blue)
 ![Game](https://img.shields.io/badge/game-MIMESIS-purple)
 ![MelonLoader](https://img.shields.io/badge/MelonLoader-0.7.3+-green)
 ![Status](https://img.shields.io/badge/status-working-brightgreen)
+
+![BetterJump in MIMESIS](https://raw.githubusercontent.com/DooDesch-Mods/Mimesis-BetterJump/main/docs/img/header.jpg)
 
 ---
 
@@ -21,17 +23,27 @@
 - Single `Enabled` toggle to switch the mod on/off without uninstalling, plus an optional `DebugLogs` switch for troubleshooting.
 - Uses your normal jump key - no input rebinding.
 
+## Screenshots
+
+![First-person view during a native jump with BetterJump enabled](https://raw.githubusercontent.com/DooDesch-Mods/Mimesis-BetterJump/main/docs/img/mid-jump.jpg)
+
+A real jump in the isolated MIMESIS session, using the normal jump action.
+
+![The same view after landing in the MIMESIS maintenance area](https://raw.githubusercontent.com/DooDesch-Mods/Mimesis-BetterJump/main/docs/img/grounded.jpg)
+
+The same direction after landing. Both captures use BetterJump.
+
 ## Requirements
 
 | Component | Version |
 |---|---|
-| MIMESIS | 0.3.2 |
+| MIMESIS | 0.4.0 |
 | MelonLoader | 0.7.3+ |
-| MimicAPI | Required - MimicAPI 0.4.2, [Nexus download](https://www.nexusmods.com/mimesis/mods/11), install separately |
+| MimicAPI | Required - MimicAPI 0.4.3, [Nexus download](https://www.nexusmods.com/mimesis/mods/11), install separately |
 
 BetterJump reads private jump and ground state through MimicAPI and will not function without it. Installing through a mod manager pulls in MimicAPI (`NeoMimicry-MimicAPI-0.3.0`) and MelonLoader automatically.
 
-For Nexus, install [MimicAPI 0.4.2](https://www.nexusmods.com/mimesis/mods/11) separately. Keep one `Mods/MimicAPI.dll`; the mod archive does not include it. Thunderstore resolves its existing MimicAPI dependency through the mod manager.
+For Nexus, install [MimicAPI 0.4.3](https://www.nexusmods.com/mimesis/mods/11) separately. Keep one `Mods/MimicAPI.dll`; the mod archive does not include it. Thunderstore resolves its existing MimicAPI dependency through the mod manager.
 
 ## Installation
 
@@ -65,8 +77,8 @@ There is no keybind - just use your normal in-game jump input. BetterJump hooks 
 
 Source and license (MIT, Copyright (c) 2025 DooDesch): [github.com/DooDesch-Mods/Mimesis-BetterJump](https://github.com/DooDesch-Mods/Mimesis-BetterJump).
 
-## AI disclosure
+## Images
 
-The mod icon is AI-generated.
+Gallery images are captured in MIMESIS; release artwork uses real game photos.
 
-Built against MIMESIS 0.3.2 / MelonLoader 0.7.3.
+Built against MIMESIS 0.4.0 / MelonLoader 0.7.3.
