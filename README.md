@@ -5,7 +5,7 @@
 
 > Makes jumping in Mimesis actually useful - the stock jump is near-useless for getting around, so BetterJump retunes it (stronger configurable jump plus a brief forced-airborne window) to clear gaps and obstacles reliably.
 
-![Version](https://img.shields.io/badge/version-1.5.8-blue)
+![Version](https://img.shields.io/badge/version-1.6.0-blue)
 ![Game](https://img.shields.io/badge/game-MIMESIS-purple)
 ![MelonLoader](https://img.shields.io/badge/MelonLoader-0.7.3+-green)
 ![Status](https://img.shields.io/badge/status-working-brightgreen)
@@ -56,24 +56,29 @@ For Nexus, install [MimicAPI 0.4.3](https://www.nexusmods.com/mimesis/mods/11) s
 
 ## Configuration
 
-Stored in `UserData/MelonPreferences.cfg` under the `BetterJump` category.
+Stored in `UserData/MelonPreferences.cfg` under `[BetterJump]`.
 
-Each Steam lobby uses a snapshot of the host's `Enabled`, `JumpVelocity`, `ForceUngroundTime` and `AirGravityScale` settings. Clients use that snapshot without overwriting their saved configuration. `DebugLogs` stays local. If the host does not have BetterJump, clients use vanilla jump behavior. Change the host configuration before creating the next lobby.
+Gameplay settings follow the lobby host without overwriting saved client preferences. Without the mod on the host, clients use vanilla behavior. Live settings apply after the host changes them through a MelonPreferences UI or reloads the preferences; editing the file alone does not reload it. Use the same current mod version on host and clients for the new options and live updates. Older versions retain their initial legacy snapshot. Invalid new values use the registered default with a warning.
 
-| Option | Description | Default | Values/Range |
-|---|---|---|---|
-| `Enabled` | Enable BetterJump functionality. When disabled, the mod does not modify jump behavior. | `true` | `true` / `false` |
-| `JumpVelocity` | Upward speed applied when a jump starts (units/second). Higher values result in stronger jumps. | `4.8` | Any value `>= 0` (negative values are clamped to `0` at runtime) |
-| `ForceUngroundTime` | Seconds to keep the avatar airborne before the next ground check can succeed. Prevents the game from immediately detecting the ground after a jump, improving responsiveness. | `0.08` | Any value `>= 0.01` (clamped to a minimum of `0.01s`; the effective hold is at least `0.02s` at jump time) |
-| `AirGravityScale` | Gravity multiplier during ascent. Blends back to normal gravity near the apex; descent uses normal gravity. | `0.7` | `0.1` - `1.0` (clamped at runtime) |
-| `DebugLogs` | Enable detailed debug logging for troubleshooting jump behavior. | `false` | `true` / `false` |
+All gameplay settings below are live. `MaxAirGravitySeconds` applies to the next jump. `DebugLogs` stays local.
+
+| Option | Default | Range and effect |
+|---|---|---|
+| `Enabled` | `true` | Enable boosted jumping. |
+| `JumpVelocity` | `4.8` | Upward speed; at least 0. |
+| `ForceUngroundTime` | `0.08` | Forced airborne seconds; at least 0.01, effective takeoff hold at least 0.02. |
+| `AirGravityScale` | `0.7` | Ascent gravity multiplier, 0.1-1. Descent remains native. |
+| `LandSettleSeconds` | `0.15` | Continuous ground contact before another boosted jump; at least 0.01 seconds. |
+| `ApexBlendSpeed` | `2.5` | Positive rising speed below which gravity blends back to normal. |
+| `MaxAirGravitySeconds` | `8` | Positive timeout for the reduced-gravity phase. |
+| `DebugLogs` | `false` | Local detailed logging. |
 
 ## Usage
 
 There is no keybind - just use your normal in-game jump input. BetterJump hooks the game's jump and ground-check logic, so jumping simply feels stronger and more responsive.
 
 - Raise `JumpVelocity` for higher jumps; adjust `ForceUngroundTime` if jumps feel cut short.
-- Set jump rules in the host's `UserData/MelonPreferences.cfg` (category `BetterJump`) before creating the lobby.
+- Set jump rules in the host's `UserData/MelonPreferences.cfg` (category `BetterJump`) before creating the lobby, or change safe rules live through a preferences UI.
 - Effects apply only to your own avatar.
 
 ## Compatibility

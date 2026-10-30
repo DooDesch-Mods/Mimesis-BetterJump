@@ -21,19 +21,16 @@ namespace BetterJump.Runtime
 		// Safety backstop: even if the actor never lands (e.g. falling off a cliff into a kill
 		// zone), the reduced air gravity is released after this time at the latest, so there is
 		// no permanent floating / state leak.
-		private const float MaxAirGravitySeconds = 8f;
 
 		// The boost is only re-armed after this much continuous ground contact. Reason:
 		// CheckGrounded already reports grounded ~0.1-0.15 m above the ground (generous SphereCast
 		// zone, checkGroundedDistance = 0.5), and during a slow floaty descent the avatar lingers
 		// there for several frames. Without this latch you could re-jump in mid-air right there
 		// and climb upwards. 0.15 s covers even the floatiest settings.
-		private const float LandSettleSeconds = 0.15f;
 
 		// At or above this rising speed (m/s) the reduced gravity applies fully; below it, gravity
 		// is blended linearly back to normal. Prevents the long lingering at the apex
 		// ("invisible platform") without losing the floaty rise.
-		private const float ApexBlendSpeed = 2.5f;
 
 		private static readonly Dictionary<ProtoActor, ActorState> States = new();
 
@@ -87,7 +84,7 @@ namespace BetterJump.Runtime
 			var state = new ActorState
 			{
 				ForceUngroundUntil = Time.time + Mathf.Max(0.02f, BetterJumpPreferences.ForceUngroundTime),
-				AirGravityUntil = Time.time + MaxAirGravitySeconds,
+				AirGravityUntil = Time.time + BetterJumpPreferences.MaxAirGravitySeconds,
 				GroundedSince = -1f,
 				LastGravityTime = -1f
 			};
@@ -135,7 +132,7 @@ namespace BetterJump.Runtime
 				{
 					state.GroundedSince = Time.time;
 				}
-				if (Time.time - state.GroundedSince >= LandSettleSeconds)
+				if (Time.time - state.GroundedSince >= BetterJumpPreferences.LandSettleSeconds)
 				{
 					States.Remove(actor);
 				}
@@ -245,7 +242,7 @@ namespace BetterJump.Runtime
 			// Float only while the avatar is rising quickly; blend back to normal gravity towards the
 			// apex (small rising speed). Otherwise falling crosses 0 very slowly and the avatar
 			// lingers briefly at the apex = the "invisible platform".
-			float blend = Mathf.Clamp01(current / ApexBlendSpeed);
+			float blend = Mathf.Clamp01(current / BetterJumpPreferences.ApexBlendSpeed);
 			float effectiveScale = Mathf.Lerp(1f, scale, blend);
 			float counter = Physics.gravity.y * Time.deltaTime * (effectiveScale - 1f);
 			SetFalling(actor, current + counter);
