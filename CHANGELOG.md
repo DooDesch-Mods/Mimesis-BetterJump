@@ -4,6 +4,13 @@ All notable changes to BetterJump are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 project adheres to Semantic Versioning.
 
+## [1.6.0] - 2026-10-30
+
+### Changed
+
+- Apply host jump rules live while preserving client preferences.
+- Expose landing settle time, apex gravity blending and the reduced-gravity timeout; keep existing defaults.
+
 ## [1.5.8] - 2026-10-28
 
 ### Changed

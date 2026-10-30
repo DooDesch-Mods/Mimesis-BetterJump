@@ -21,6 +21,9 @@ namespace BetterJump.Config
 		private static HostSetting<float> _hostJumpVelocity;
 		private static HostSetting<float> _hostForceUngroundTime;
 		private static HostSetting<float> _hostAirGravityScale;
+		private static HostSetting<float> _landSettleSeconds;
+		private static HostSetting<float> _apexBlendSpeed;
+		private static HostSetting<float> _maxAirGravitySeconds;
 
 		internal static void Initialize()
 		{
@@ -37,11 +40,15 @@ namespace BetterJump.Config
 			_debugLogs = CreateEntry("DebugLogs", false, "Debug Logs", "Enable detailed debug logging for troubleshooting jump behavior.");
 
 			_hostSettings = new HostSettings(CategoryId);
-			_hostEnabled = _hostSettings.Register(_enabled, false);
-			_hostJumpVelocity = _hostSettings.Register(_jumpVelocity, 0f);
-			_hostForceUngroundTime = _hostSettings.Register(_forceUngroundTime, 0.01f);
-			_hostAirGravityScale = _hostSettings.Register(_airGravityScale, 1f);
+			_hostEnabled = _hostSettings.Register(_enabled, false, live: true);
+			_hostJumpVelocity = _hostSettings.Register(_jumpVelocity, 0f, value => value >= 0, live: true, localValue: () => Mathf.Max(0f, _jumpVelocity.Value));
+			_hostForceUngroundTime = _hostSettings.Register(_forceUngroundTime, 0.01f, value => value >= 0.01f, live: true, localValue: () => Mathf.Max(0.01f, _forceUngroundTime.Value));
+			_hostAirGravityScale = _hostSettings.Register(_airGravityScale, 1f, value => value >= 0.1f && value <= 1f, live: true, localValue: () => Mathf.Clamp(_airGravityScale.Value, 0.1f, 1f));
+			_landSettleSeconds = _hostSettings.Register(CreateEntry("LandSettleSeconds", 0.15f, "Landing Settle Time", "Host setting, live. Continuous ground contact required before another boosted jump. Seconds, at least 0.01. Default: 0.15"), 0.15f, value => value >= 0.01f, live: true, legacy: false);
+			_apexBlendSpeed = _hostSettings.Register(CreateEntry("ApexBlendSpeed", 2.5f, "Apex Blend Speed", "Host setting, live. Rising speed below which gravity blends back to normal. Positive units/second. Default: 2.5"), 2.5f, value => value > 0f, live: true, legacy: false);
+			_maxAirGravitySeconds = _hostSettings.Register(CreateEntry("MaxAirGravitySeconds", 8f, "Air Gravity Timeout", "Host setting, live for the next jump. Maximum time before reduced gravity is released. Positive seconds. Default: 8"), 8f, value => value > 0f, live: true, legacy: false);
 			_hostSettings.EffectiveValuesChanged += JumpRuntimeState.Reset;
+			_hostSettings.LiveValuesChanged += JumpRuntimeState.Reset;
 		}
 
 		private static MelonPreferences_Entry<T> CreateEntry<T>(string identifier, T defaultValue, string displayName, string description = null)
@@ -63,6 +70,9 @@ namespace BetterJump.Config
 		internal static float AirGravityScale => Mathf.Clamp(_hostAirGravityScale?.Value ?? 1f, 0.1f, 1f);
 
 		internal static bool DebugLogs => _debugLogs.Value;
+		internal static float LandSettleSeconds => _landSettleSeconds?.Value ?? 0.15f;
+		internal static float ApexBlendSpeed => _apexBlendSpeed?.Value ?? 2.5f;
+		internal static float MaxAirGravitySeconds => _maxAirGravitySeconds?.Value ?? 8f;
 	}
 }
 
