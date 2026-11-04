@@ -2,6 +2,8 @@
 
 > 🛟 **Need help or found a bug?** Get support at [support.doodesch.de/betterjump](https://support.doodesch.de/betterjump).
 
+[![Discord](https://mods.doodesch.de/img/badge.svg)](https://mods.doodesch.de)
+
 
 > Makes jumping in Mimesis actually useful - the stock jump is near-useless for getting around, so BetterJump retunes it (stronger configurable jump plus a brief forced-airborne window) to clear gaps and obstacles reliably.
 
@@ -92,6 +94,12 @@ dotnet build -c Release
 ```
 
 Targets `netstandard2.1`. References the game DLLs and MelonLoader from the shared workspace `lib/` set, and links MimicAPI via `ProjectReference` (`Private=false`) declared as a MelonLoader optional dependency. The shared deploy configuration defaults to `_Test/MIMESIS/Mods`.
+
+## Community
+
+[![DooDesch Mods on Discord](https://mods.doodesch.de/img/card.svg)](https://mods.doodesch.de)
+
+Join the DooDesch Mods Discord: update pings, polls on what comes next, and playtests of new mods.
 
 ## Credits / License
 
