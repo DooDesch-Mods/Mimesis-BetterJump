@@ -2,6 +2,8 @@
 
 > 🛟 **Need help or found a bug?** Get support at [support.doodesch.de/betterjump](https://support.doodesch.de/betterjump).
 
+[![Discord](https://mods.doodesch.de/img/badge.svg)](https://mods.doodesch.de)
+
 
 > Makes jumping in Mimesis actually useful - the stock jump is near-useless for getting around, so BetterJump retunes it (stronger configurable jump plus a brief forced-airborne window) to clear gaps and obstacles reliably.
 
@@ -87,3 +89,9 @@ Source and license (MIT, Copyright (c) 2025 DooDesch): [github.com/DooDesch-Mods
 Gallery images are captured in MIMESIS; release artwork uses real game photos.
 
 Built against MIMESIS 0.4.0 / MelonLoader 0.7.3.
+
+## Community
+
+[![DooDesch Mods on Discord](https://mods.doodesch.de/img/card.svg)](https://mods.doodesch.de)
+
+Join the DooDesch Mods Discord: update pings, polls on what comes next, and playtests of new mods.
